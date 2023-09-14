@@ -2,14 +2,27 @@ import java.util.Arrays
 
 class CalculateService {
 
-    var calculateRecodes = CalculateRecodes()
+    private val calculateRecodes = CalculateRecodes()
+    private val consoleModule = ConsoleModule()
+    private val calculator = PolynomialCalculate()
 
-    fun run(){
+    fun run() {
         var t = true
-        while (t){
-            // 입력받기
-            // 계산하기
-            // 결과 저장
+        while (t) {
+            consoleModule.menu()
+            var choice = consoleModule.input().toInt()
+
+            if (choice == 1) {
+                consoleModule.output(calculateRecodes)
+            } else if (choice == 2) {
+                var input = consoleModule.input()
+                var result =  calculator.calculateByString(input)
+                consoleModule.output(result.result)
+                calculateRecodes.recodes.add(result)
+            } else {
+                t = false
+                consoleModule.output("안녕히가쇼")
+            }
         }
     }
 }
